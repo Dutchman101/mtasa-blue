@@ -85,10 +85,7 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 jobs:
-  windows:
-    strategy:
-      matrix:
-        platform: [win32, x64, arm64]
+    platform: [win32]
     name: windows-${{ matrix.platform }}
     runs-on: windows-2022
     steps:
@@ -131,7 +128,7 @@ jobs:
           name: InstallFiles-${{ matrix.platform }}
           path: InstallFiles/
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
